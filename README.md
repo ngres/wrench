@@ -1,15 +1,10 @@
 # VLA Wrench Control ROS 2
 
-WIP
+Experiments to capture imitation learning datasets in end effector wrench action space.
 
 ```
-pixi pixi install
-```
-
-```
+git clone --recurse-submodules https://github.com/ngres/wrench.git
+pixi install
 pixi run zenoh
-```
-
-```
 pixi run demo
 ```

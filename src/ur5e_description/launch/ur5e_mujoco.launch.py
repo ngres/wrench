@@ -84,16 +84,14 @@ def launch_setup(context, *args, **kwargs):
                 ParameterFile(mujoco_plugins_file),
             ],
             remappings=(
-                [("~/robot_description", "/robot_description")]
-                if os.environ.get("ROS_DISTRO") == "humble"
-                else []
+                [("/motion_control_handle/target_frame", "/cartesian_compliance_controller/target_frame")]
             ),
             on_exit=Shutdown(),
         )
     )
 
     # Controller spawners
-    for controller in ["joint_state_broadcaster", "force_torque_sensor_broadcaster", "arm_controller"]:
+    for controller in ["joint_state_broadcaster", "force_torque_sensor_broadcaster", "cartesian_compliance_controller", "motion_control_handle"]:
         nodes.append(
             Node(
                 package="controller_manager",

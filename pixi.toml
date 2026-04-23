@@ -11,11 +11,10 @@ CMAKE_INSTALL_MODE          = "SYMLINK"
 COLCON_DEFAULT_OUTPUT_STYLE = "catkin_tools"
 LIBRARY_PATH = "${CONDA_PREFIX}/lib:${LIBRARY_PATH}"
 LD_LIBRARY_PATH = "${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
-LDFLAGS = "-L${CONDA_PREFIX}/lib -Wl,-rpath,${CONDA_PREFIX}/lib -fuse-ld=mold"
 RMW_IMPLEMENTATION = "rmw_zenoh_cpp"
 
 [tasks]
-build = "colcon build --packages-skip cartesian_controller_simulation cartesian_controller_handles cartesian_controller_tests mujoco_ros2_control_tests"
+build = "colcon build --packages-skip cartesian_controller_simulation cartesian_controller_tests mujoco_ros2_control_tests"
 zenoh = "bash -c 'source ./install/setup.bash && ros2 run rmw_zenoh_cpp rmw_zenohd'"
 rerun = "bash -c 'source ./install/setup.bash && rewire record -a'"
 demo = "bash -c 'source ./install/setup.bash && ros2 launch ur5e_description ur5e_mujoco.launch.py'"
@@ -28,6 +27,7 @@ rewire = ">=0.3.1,<0.4"
 ros-jazzy-ur = ">=3.7.0,<4"
 ros-jazzy-ur-robot-driver = ">=3.7.0,<4"
 process-compose = ">=1.103.0,<2"
+ros-jazzy-rqt-reconfigure = ">=1.6.3,<2"
 
 [dev]
 ros-jazzy-cartesian-controller-base = { path = "src/cartesian_controllers/cartesian_controller_base/package.xml" }

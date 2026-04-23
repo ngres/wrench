@@ -1,0 +1,44 @@
+[workspace]
+authors = ["Nicolas Gres <nicolas@gres.io>"]
+channels = ["https://prefix.dev/robostack-jazzy", "https://prefix.dev/conda-forge", "https://prefix.dev/rewire"]
+preview = ["pixi-build"]
+name = "wrench"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[activation.env]
+CMAKE_INSTALL_MODE          = "SYMLINK"
+COLCON_DEFAULT_OUTPUT_STYLE = "catkin_tools"
+LIBRARY_PATH = "${CONDA_PREFIX}/lib:${LIBRARY_PATH}"
+LD_LIBRARY_PATH = "${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
+LDFLAGS = "-L${CONDA_PREFIX}/lib -Wl,-rpath,${CONDA_PREFIX}/lib -fuse-ld=mold"
+RMW_IMPLEMENTATION = "rmw_zenoh_cpp"
+
+[tasks]
+build = "colcon build --packages-skip cartesian_controller_simulation cartesian_controller_handles cartesian_controller_tests mujoco_ros2_control_tests"
+zenoh = "bash -c 'source ./install/setup.bash && ros2 run rmw_zenoh_cpp rmw_zenohd'"
+rerun = "bash -c 'source ./install/setup.bash && rewire record -a'"
+demo = "bash -c 'source ./install/setup.bash && ros2 launch ur5e_description ur5e_mujoco.launch.py'"
+
+[dependencies]
+ros-jazzy-ros-base = "*"
+colcon-common-extensions = ">=0.3.0,<0.4"
+ros-jazzy-rmw-zenoh-cpp = ">=0.2.9,<0.3"
+rewire = ">=0.3.1,<0.4"
+ros-jazzy-ur = ">=3.7.0,<4"
+ros-jazzy-ur-robot-driver = ">=3.7.0,<4"
+process-compose = ">=1.103.0,<2"
+
+[dev]
+ros-jazzy-cartesian-controller-base = { path = "src/cartesian_controllers/cartesian_controller_base/package.xml" }
+ros-jazzy-cartesian-motion-controller = { path = "src/cartesian_controllers/cartesian_motion_controller/package.xml" }
+ros-jazzy-cartesian-force-controller = { path = "src/cartesian_controllers/cartesian_force_controller/package.xml" }
+ros-jazzy-cartesian-compliance-controller = { path = "src/cartesian_controllers/cartesian_compliance_controller/package.xml" }
+ros-jazzy-mujoco-ros2-control = { path = "src/mujoco_ros2_control/mujoco_ros2_control/package.xml" }
+ros-jazzy-mujoco-ros2-control-msgs = { path = "src/mujoco_ros2_control/mujoco_ros2_control_msgs/package.xml" }
+ros-jazzy-mujoco-ros2-control-plugins = { path = "src/mujoco_ros2_control/mujoco_ros2_control_plugins/package.xml" }
+ros-jazzy-mujoco-ros2-control-demos = { path = "src/mujoco_ros2_control/mujoco_ros2_control_demos/package.xml" }
+ros-jazzy-ur5e-description = { path = "src/ur5e_description/package.xml" }
+
+[pypi-dependencies]
+colcon-fish = ">=0.0.2, <0.0.3"

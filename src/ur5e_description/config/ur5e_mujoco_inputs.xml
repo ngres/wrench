@@ -1,0 +1,30 @@
+<mujoco_inputs>
+
+  <raw_inputs>
+    <option integrator="implicitfast"/>
+
+    <default>
+      <default class="visual">
+        <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+      </default>
+      <default class="collision">
+        <geom group="3" type="mesh"/>
+      </default>
+    </default>
+
+    <sensor>
+      <force name="fts_sensor_force" site="ft_frame"/>
+      <torque name="fts_sensor_torque" site="ft_frame"/>
+    </sensor>
+
+    <actuator>
+      <general name="shoulder_pan_joint"  joint="shoulder_pan_joint"  gaintype="fixed" biastype="affine" gainprm="2000" biasprm="0 -2000 -400" forcerange="-150 150" ctrlrange="-6.28318 6.28318"/>
+      <general name="shoulder_lift_joint" joint="shoulder_lift_joint" gaintype="fixed" biastype="affine" gainprm="2000" biasprm="0 -2000 -400" forcerange="-150 150" ctrlrange="-6.28318 6.28318"/>
+      <general name="elbow_joint"         joint="elbow_joint"         gaintype="fixed" biastype="affine" gainprm="2000" biasprm="0 -2000 -400" forcerange="-150 150" ctrlrange="-3.14159 3.14159"/>
+      <general name="wrist_1_joint"       joint="wrist_1_joint"       gaintype="fixed" biastype="affine" gainprm="200"  biasprm="0 -200 -40"   forcerange="-28 28"   ctrlrange="-6.28318 6.28318"/>
+      <general name="wrist_2_joint"       joint="wrist_2_joint"       gaintype="fixed" biastype="affine" gainprm="100"  biasprm="0 -100 -20"   forcerange="-28 28"   ctrlrange="-6.28318 6.28318"/>
+      <general name="wrist_3_joint"       joint="wrist_3_joint"       gaintype="fixed" biastype="affine" gainprm="50"   biasprm="0 -50 -10"    forcerange="-28 28"   ctrlrange="-6.28318 6.28318"/>
+    </actuator>
+  </raw_inputs>
+
+</mujoco_inputs>

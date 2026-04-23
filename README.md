@@ -5,6 +5,7 @@ Experiments to capture imitation learning datasets in end effector wrench action
 ```
 git clone --recurse-submodules https://github.com/ngres/wrench.git
 pixi install
+pixi run build
 pixi run zenoh
 pixi run demo
 ```
